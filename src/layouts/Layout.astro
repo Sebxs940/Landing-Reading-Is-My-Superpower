@@ -1,22 +1,46 @@
 <!doctype html>
 <html lang="en">
 	<head>
+		<title>Reading is my superpower - Simon Bolivar High School</title>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/Icon.webp" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
 	</head>
 	<body>
 		<slot />
 	</body>
 </html>
-
-<style>
+<!-- Apartado de estilos generales -->
+<style is:global>
+	@import "tailwindcss";
 	html,
 	body {
+		background-image: url('../assets/Fondo.webp');
+		background-size: cover;
 		margin: 0;
 		width: 100%;
 		height: 100%;
+		overflow-x: hidden;
+		overscroll-behavior: hidden;
+	}
+/* Importación de fuentes */
+	@theme{
+		--font-regular: "MerriweatherSans-Regular", system-ui, sans-serif;
+		--font-bold: "acmesab", system-ui, sans-serif;
+		--font-light: "MerriweatherSans-Light", system-ui,
+	}
+
+	@font-face {
+		font-family: "MerriweatherSans-Regular";
+		src: url(/Fonts/MerriweatherSans-Regular.woff);
+	}
+	@font-face {
+		font-family: "MerriweatherSans-Light";
+		src: url(/Fonts/MerriweatherSans-Light.woff);
+	}
+	@font-face {
+		font-family: "acmesab";
+		src: url(/Fonts/acmesab.TTF);
 	}
 </style>

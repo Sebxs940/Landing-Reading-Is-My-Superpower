@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Libros from '../assets/Libros.webp';
+---
+
+<Layout>
+	<div class="pt-2.5">
+		<header class="font-bold pt-1.5 bg-[#F5F3EB] rounded-full h-14 ml-31 max-w-5xl mx-auto">
+			<h1 class="absolute text-[22px] ml-82 mt-[4.45px]">Reading is my superpower</h1>
+			<img src={Libros.src} alt="Libros" class="absolute size-10 w-12 -mt-[-0.5px] ml-69" />
+			<img src={Libros.src} alt="Libros" class="absolute size-10 w-12 -mt-[-0.5px] ml-178" />
+			<a href=".." class="absolute text-[16px] ml-230 mt-2.5">Salir</a>
+		</header>
+</Layout>
