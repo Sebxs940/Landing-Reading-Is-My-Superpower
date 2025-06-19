@@ -40,4 +40,5 @@ app.post('/api/vote', async (req, res) => {
 	}
 });
 
-app.listen(4321, () => console.log('🚀 Server running on http://localhost:4321'));
+const PORT = process.env.PORT || 4321;
+app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
