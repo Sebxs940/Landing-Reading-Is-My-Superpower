@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const PORT = 4321;
+const PORT = process.env.PORT || 4321;
 
 async function startServer() {
 	const db = await connectDB();
