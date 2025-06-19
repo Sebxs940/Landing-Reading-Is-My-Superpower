@@ -23,14 +23,19 @@ async function startServer() {
     const db = await connectDB();
     await initUsersCollection();
 
+    console.log('➡️ Registrando rutas de votación...');
     registerVoteRoute(app, db);
+
+    console.log('➡️ Registrando rutas de login...');
     registerLoginRoute(app, db);
 
+    console.log('➡️ Registrando ruta catch-all...');
     app.get('*', (req, res) => {
       res.sendFile(path.join(distPath, 'index.html'));
     });
 
-    app.listen(PORT, () => console.log(`🚀 Servidor en http://localhost:${PORT}`));
+    console.log('🚀 Iniciando servidor...');
+    app.listen(PORT, () => console.log(`✅ Servidor escuchando en http://localhost:${PORT}`));
   } catch (error) {
     console.error('❌ Error al iniciar:', error);
     process.exit(1);
