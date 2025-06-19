@@ -33,7 +33,7 @@ import Libros from '../assets/Libros.webp';
 
 		<dialog id="dialog" class="absolute rounded-xl max-w-5xl mx-auto p-6 backdrop:bg-black/40">
 			<div class="bg-[#F5F3EB] p-6 rounded-xl">
-				<form method="dialog" class="flex justify-end">
+				<form class="flex justify-end">
 					<button class="text-gray-600 hover:text-gray-800">✕</button>
 				</form>
 				<h2 class="font-bold text-xl mb-4 text-center">Voting Instructions</h2>
@@ -48,65 +48,101 @@ import Libros from '../assets/Libros.webp';
 		</dialog>
 
 		<dialog id="dialog2" class="absolute rounded-xl max-w-5xl mx-auto p-6 backdrop:bg-black/40">
-			<div class="bg-[#F5F3EB] p-6 rounded-xl">
-				<form method="dialog" class="flex justify-end">
-					<button class="text-gray-600 hover:text-gray-800 mb-2">✕</button>
-				</form>
-				<h2 class="font-bold text-xl mb-4 text-center">Vote for the best comic now!</h2>
-				<form method="post">
-					<div class="space-y-4">
-						<div class="flex flex-col">
-							<label for="Name" class="text-gray-700 font-medium mb-1">Name:</label>
-							<input 
-								type="text" 
-								id="Name" 
-								name="Name" 
-								required 
-								placeholder="Enter your name"
-								class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
-							>
-						</div>
-						<div class="flex flex-col">
-							<label for="Email" class="text-gray-700 font-medium mb-1">Institutional Email:</label>
-							<input 
-								type="email" 
-								id="Email" 
-								name="Email" 
-								required 
-								placeholder="Enter your Email"
-								class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
-							>
-						</div>
-						<div class="flex flex-col">
-							<label for="Grade" class="text-gray-700 font-medium mb-1">Grade:</label>
-							<input 
-								type="text" 
-								id="Grade" 
-								name="Grade" 
-								required 
-								placeholder="Enter your grade"
-								class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
-							>
-						</div>
-						<div class="flex flex-col">
-							<label for="Comic" class="text-gray-700 font-medium mb-1">Comic:</label>
-							<input 
-								type="text" 
-								id="Comic" 
-								name="Comic" 
-								required 
-								placeholder="Enter your favorite comic"
-								class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
-							>
-						</div>
-						<button type="submit" class="w-full bg-[#3A5A6B] text-white py-2 px-4 rounded-lg hover:bg-blue-800 transition-colors">
-							Submit Vote
-						</button>
-					</div>
-				</form>
+	<div class="bg-[#F5F3EB] p-6 rounded-xl">
+		<form method="dialog" class="flex justify-end">
+			<button class="text-gray-600 hover:text-gray-800 mb-2">✕</button>
+		</form>
+		<h2 class="font-bold text-xl mb-4 text-center">Vote for the best comic now!</h2>
+		<form method="post" action="/api/vote" id="voteForm">
+			<div class="space-y-4">
+				<div class="flex flex-col">
+					<label for="Name" class="text-gray-700 font-medium mb-1">Name:</label>
+					<input 
+						type="text" 
+						id="Name" 
+						name="Name" 
+						required 
+						placeholder="Enter your name"
+						class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
+					>
+				</div>
+				<div class="flex flex-col">
+					<label for="Email" class="text-gray-700 font-medium mb-1">Institutional Email:</label>
+					<input 
+						type="email" 
+						id="Email" 
+						name="Email" 
+						required 
+						placeholder="Enter your Email"
+						class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
+					>
+				</div>
+				<div class="flex flex-col">
+					<label for="Grade" class="text-gray-700 font-medium mb-1">Grade:</label>
+					<input 
+						type="text" 
+						id="Grade" 
+						name="Grade" 
+						required 
+						placeholder="Enter your grade"
+						class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
+					>
+				</div>
+				<div class="flex flex-col">
+					<label for="Comic" class="text-gray-700 font-medium mb-1">Comic:</label>
+					<select 
+						id="Comic" 
+						name="Comic" 
+						required 
+						class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
+					>
+						<option value="" disabled selected>Select your favorite comic</option>
+						<option value="comic1">The Reading Hero</option>
+						<option value="comic2">Adventures in Bookland</option>
+						<option value="comic3">Super Reader</option>
+						<option value="comic4">The Power of Words</option>
+						<option value="comic5">Library Warriors</option>
+					</select>
+				</div>
+				<button type="submit" class="w-full bg-[#3A5A6B] text-white py-2 px-4 rounded-lg hover:bg-blue-800 transition-colors">
+					Submit Vote
+				</button>
+				<p id="message" class="text-sm text-center mt-2"></p>
 			</div>
-		</dialog>
-	</article>
+		</form>
+
+		<script>
+	const form = document.getElementById('voteForm') as HTMLFormElement;
+	const message = document.getElementById('message');
+
+	if (!message) throw new Error('Message element not found');
+	if (!form) throw new Error('Form element not found');
+
+	form.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		const data = Object.fromEntries(new FormData(form));
+		console.log(data);
+
+		try {
+			const res = await fetch('/api/vote', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(data)
+			});
+
+			const result = await res.json();
+			message.textContent = result.message;
+			message.className = 'text-green-600';
+		} catch (err) {
+			message.textContent = 'Error sending your vote.';
+			message.className = 'text-red-600';
+		}
+	});
+</script>
+
+	</div>
+</dialog>
+</article>
 
 	
 </Layout>

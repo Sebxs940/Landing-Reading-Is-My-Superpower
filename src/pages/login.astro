@@ -11,47 +11,79 @@ import Libros from '../assets/Libros.webp';
 			<img src={Libros.src} alt="Libros" class="absolute size-10 w-12 -mt-[-0.5px] ml-178" />
 			<a href=".." class="absolute text-[16px] ml-225 mt-2.5">Votación</a>
 		</header>
-	
-        <form method="post" class="bg-[#F5F3EB] rounded-lg shadow-lg p-6 w-80 max-w-5xl mx-auto mt-8">
-					<div class="space-y-4">
-						<div class="flex flex-col">
-							<label for="Code" class="text-gray-700 font-medium mb-1">Code:</label>
-							<input 
-								type="text" 
-								id="Code" 
-								name="Code" 
-								required 
-								placeholder="Enter your code"
-								class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
-							>
-						</div>
 
-                        <div class="flex flex-col">
-							<label for="email" class="text-gray-700 font-medium mb-1">Email:</label>
-							<input 
-								type="text" 
-								id="email" 
-								name="email" 
-								required 
-								placeholder="Enter your email"
-								class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
-							>
-						</div>
+		<form id="login-form" class="bg-[#F5F3EB] rounded-lg shadow-lg p-6 w-80 max-w-5xl mx-auto mt-8">
+			<div class="space-y-4">
+				<div class="flex flex-col">
+					<label for="Code" class="text-gray-700 font-medium mb-1">Code:</label>
+					<input 
+						type="text" 
+						id="Code" 
+						name="Code" 
+						required 
+						placeholder="Enter your code"
+						class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
+					>
+				</div>
 
-                        <div class="flex flex-col">
-							<label for="password" class="text-gray-700 font-medium mb-1">Password:</label>
-							<input 
-								type="password" 
-								id="password" 
-								name="password" 
-								required 
-								placeholder="Enter your password"
-								class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
-							>
-						</div>
-                        <button type="submit" formaction="/dashboard" class="w-full bg-[#3A5A6B] text-white py-2 px-4 rounded-lg hover:bg-blue-800 transition-colors">
-                            Login
-                        </button>
-                    </div>
-                </form>
+				<div class="flex flex-col">
+					<label for="email" class="text-gray-700 font-medium mb-1">Email:</label>
+					<input 
+						type="text" 
+						id="email" 
+						name="email" 
+						required 
+						placeholder="Enter your email"
+						class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
+					>
+				</div>
+
+				<div class="flex flex-col">
+					<label for="password" class="text-gray-700 font-medium mb-1">Password:</label>
+					<input 
+						type="password" 
+						id="password" 
+						name="password" 
+						required 
+						placeholder="Enter your password"
+						class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
+					>
+				</div>
+
+				<button type="submit" class="w-full bg-[#3A5A6B] text-white py-2 px-4 rounded-lg hover:bg-blue-800 transition-colors">
+					Login
+				</button>
+			</div>
+		</form>
+	</div>
+
+	<script type="module">
+		const form = document.querySelector('#login-form');
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+
+			const data = new FormData(form);
+			const payload = {
+				email: data.get('email'),
+				password: data.get('password')
+			};
+
+			const res = await fetch('/api/login', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(payload)
+			});
+
+			const result = await res.json();
+
+			if (res.ok) {
+				alert(result.message);
+				window.location.href = '/dashboard';
+			} else {
+				alert(result.message);
+			}
+		});
+	</script>
 </Layout>

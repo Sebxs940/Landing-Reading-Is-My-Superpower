@@ -1,14 +1,98 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Libros from '../assets/Libros.webp';
----
+import { connectDB } from '../lib/db.js';
 
+interface Voto {
+	name: string;
+	email: string;
+	grade: number;
+	comic: string | Date;
+}
+
+const db = await connectDB();
+const votos: Voto[] = await db.collection('votes').find().toArray();
+
+// Contar votos por comic
+const votosPorComic: Record<string, number> = {};
+for (const voto of votos) {
+	const comic = String(voto.comic);
+	votosPorComic[comic] = (votosPorComic[comic] || 0) + 1;
+}
+---
 <Layout>
 	<div class="pt-2.5">
-		<header class="font-bold pt-1.5 bg-[#F5F3EB] rounded-full h-14 ml-31 max-w-5xl mx-auto">
+		<header class="font-bold pt-1.5 bg-[#F5F3EB] rounded-full h-14 ml-31 max-w-5xl mx-auto relative">
 			<h1 class="absolute text-[22px] ml-82 mt-[4.45px]">Reading is my superpower</h1>
-			<img src={Libros.src} alt="Libros" class="absolute size-10 w-12 -mt-[-0.5px] ml-69" />
-			<img src={Libros.src} alt="Libros" class="absolute size-10 w-12 -mt-[-0.5px] ml-178" />
-			<a href=".." class="absolute text-[16px] ml-230 mt-2.5">Salir</a>
+			<img src={Libros.src} alt="Libros" class="absolute w-12 h-12 top-[1px] left-[275px]" />
+			<img src={Libros.src} alt="Libros" class="absolute w-12 h-12 top-[1px] left-[710px]" />
+			<a href=".." class="absolute text-[16px] right-8 top-3">Salir</a>
 		</header>
+
+		<article class="bg-[#F5F3EB] rounded-xl mt-6 max-w-5xl mx-auto p-6 shadow-lg">
+			<h1 class="font-bold text-2xl mb-4 text-center text-gray-900">Contador de Votos</h1>
+
+			<section class="overflow-x-auto">
+				<table class="min-w-full bg-white border border-gray-200 rounded-lg">
+					<thead>
+						<tr class="bg-gray-100 text-gray-700">
+							<th class="py-2 px-4 border-b text-left">Name</th>
+							<th class="py-2 px-4 border-b text-left">Email</th>
+							<th class="py-2 px-4 border-b text-left">Grade</th>
+							<th class="py-2 px-4 border-b text-left">Comic</th>
+						</tr>
+					</thead>
+					<tbody>
+						{votos.length === 0 ? (
+							<tr>
+								<td colspan="4" class="text-center py-4 text-gray-500">No hay votos registrados.</td>
+							</tr>
+						) : (
+							votos.map((voto) => (
+								<tr class="hover:bg-gray-50 transition-colors">
+									<td class="py-2 px-4 border-b">{voto.name}</td>
+									<td class="py-2 px-4 border-b">{voto.email}</td>
+									<td class="py-2 px-4 border-b">{voto.grade}</td>
+									<td class="py-2 px-4 border-b">{voto.comic}</td>
+								</tr>
+							))
+						)}
+					</tbody>
+				</table>
+			</section>
+
+			<!-- Botón para abrir el dialog -->
+			<div class="flex justify-center mt-6">
+				<button
+					type="button"
+					class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+					onclick="document.getElementById('votos-dialog')?.showModal()"
+				>
+					Ver votos por comic
+				</button>
+			</div>
+
+			<!-- Dialog con el conteo de votos -->
+			<dialog id="votos-dialog" class="rounded-lg p-6 mt-22 bg-white shadow-lg max-w-md mx-auto">
+				<h2 class="text-lg font-bold mb-4">Votos por comic</h2>
+				<ul class="mb-4">
+					{Object.entries(votosPorComic).map(([comic, cantidad]) => (
+						<li class="mb-1">{comic} = {cantidad}</li>
+					))}
+				</ul>
+				<div class="flex justify-end">
+					<button
+						type="button"
+						class="bg-gray-400 text-white px-3 py-1 rounded hover:bg-gray-500"
+						onclick="document.getElementById('votos-dialog')?.close()"
+					>
+						Cerrar
+					</button>
+				</div>
+			</dialog>
+		</article>
+	</div>
+	<script>
+		// Para soportar Astro Islands, si usas SSR, puedes mover esto a un componente React/Svelte/Vue
+	</script>
 </Layout>
