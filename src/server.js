@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 
 import { connectDB } from './lib/db.js';
 import registerVoteRoute from '../src/routes/voteRoutes.js';
-import { initUsersCollection } from '../model/userCollection.js';
+import { initUsersCollection } from './model/userCollection.js';
 
 const app = express();
 const PORT = process.env.PORT || 4321;
