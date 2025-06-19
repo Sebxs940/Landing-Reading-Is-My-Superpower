@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "start": "node src/server.js",
-    "astro": "astro"
+    "start": "node src/server.js"
   },
   "engines": {
     "node": ">=18.20.8"
