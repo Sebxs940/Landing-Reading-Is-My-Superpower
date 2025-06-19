@@ -5,7 +5,6 @@ import { fileURLToPath } from 'url';
 
 import { connectDB } from './lib/db.js';
 import registerVoteRoute from '../src/routes/voteRoutes.js';
-import registerLoginRoute from './routes/loginRoutes.js';
 import { initUsersCollection } from '../model/userCollection.js';
 
 const app = express();
