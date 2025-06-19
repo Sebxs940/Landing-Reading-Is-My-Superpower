@@ -1,5 +1,10 @@
 import bcrypt from 'bcrypt';
 
+/**
+ * Registra la ruta de login en la app
+ * @param {import('express').Express} app - instancia de express
+ * @param {import('mongodb').Db} db - instancia de MongoDB
+ */
 export default function registerLoginRoute(app, db) {
 	app.post('/api/login', async (req, res) => {
 		const { email, password } = req.body;
@@ -21,9 +26,15 @@ export default function registerLoginRoute(app, db) {
 				return res.status(401).json({ message: '❌ Contraseña incorrecta' });
 			}
 
-			res.json({ message: '✅ Login exitoso', user: { name: user.name, email: user.email } });
+			res.status(200).json({
+				message: '✅ Login exitoso',
+				user: {
+					name: user.name,
+					email: user.email
+				}
+			});
 		} catch (err) {
-			console.error('Error en login:', err);
+			console.error('❌ Error en login:', err);
 			res.status(500).json({ message: '❌ Error al iniciar sesión' });
 		}
 	});
