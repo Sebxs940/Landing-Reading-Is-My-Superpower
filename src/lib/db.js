@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 
-const uri = import.meta.env.DB_URL;
+const uri = process.env.DB_URL;
 
 if (!uri) {
 	throw new Error('❌ ERROR: La variable DB_URL no está definida en el entorno');
