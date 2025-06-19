@@ -1,7 +1,10 @@
 [phases.setup]
-nixPkgs = ['nodejs-18_x']
-nodeVersion = '18.20.8'
-pnpmVersion = '9.15.9'
+nixPkgs = ['nodejs_18']
+aptPkgs = ['curl']
+cmds = [
+  'corepack enable',
+  'corepack prepare pnpm@9.15.9 --activate'
+]
 
 [phases.install]
 cmds = ['pnpm install --frozen-lockfile']
