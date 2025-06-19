@@ -4,13 +4,14 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import { connectDB } from './lib/db.js';
-import registerVoteRoute from './routes/voteRoutes.js'; // ← Corrige la ruta si es necesario
-import registerLoginRoute from './routes/loginRoutes.js'; // ← Asegúrate de que exista este archivo
+import registerVoteRoute from './routes/voteRoutes.js';
+import registerLoginRoute from './routes/loginRoutes.js';
 import { initUsersCollection } from './model/userCollection.js';
 
 const app = express();
 const PORT = process.env.PORT || 4321;
 
+// 🔧 Rutas absolutas con ESModules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const distPath = path.join(__dirname, 'dist');
@@ -22,20 +23,26 @@ app.use(express.static(distPath));
 
 // 🔌 Conecta a la base de datos y configura las rutas
 async function startServer() {
-	const db = await connectDB();
-	await initUsersCollection();
+	try {
+		const db = await connectDB();
+		await initUsersCollection();
 
-	registerVoteRoute(app, db);
-	registerLoginRoute(app); // <-- asegúrate que este archivo existe y funciona
+		// ✅ Rutas API
+		registerVoteRoute(app, db);
+		registerLoginRoute(app);
 
-	// Redirección para rutas no API
-	app.get('*', (req, res) => {
-		res.sendFile(path.join(distPath, 'index.html'));
-	});
+		// 🧭 Redirección a index.html para rutas no API
+		app.get('*', (req, res) => {
+			res.sendFile(path.join(distPath, 'index.html'));
+		});
 
-	app.listen(PORT, () => {
-		console.log(`🚀 Servidor escuchando en http://localhost:${PORT}`);
-	});
+		app.listen(PORT, () => {
+			console.log(`🚀 Servidor escuchando en http://localhost:${PORT}`);
+		});
+	} catch (error) {
+		console.error('❌ Error al iniciar el servidor:', error);
+		process.exit(1); // termina el proceso si falla
+	}
 }
 
 startServer();
