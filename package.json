@@ -5,15 +5,16 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "astro build",
-    "start": "node dist/server/entry.mjs"
+    "start": "node dist/server/entry.mjs",
+    "dev": "astro dev"
   },
   "engines": {
     "node": ">=18.20.8"
   },
   "dependencies": {
-    "@astrojs/node": "^9.2.2",
+    "@astrojs/node": "^9.3.0",
     "@tailwindcss/vite": "^4.1.10",
-    "astro": "^5.9.2",
+    "astro": "^5.11.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",

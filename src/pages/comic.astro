@@ -1,0 +1,31 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Libros from "../assets/Libros.webp";
+import Comic1 from "/public/comic/comic_1_image.webp"
+---
+
+<Layout>
+    <div class="pt-2.5">
+		<header class="font-bold pt-1.5 bg-[#F5F3EB] rounded-full h-14 ml-31 max-w-5xl mx-auto">
+			<h1 class="absolute text-[22px] ml-82 mt-[4.45px]">Reading is my superpower</h1>
+			<img src={Libros.src} alt="Libros" class="absolute size-10 w-12 -mt-[-0.5px] ml-69" />
+			<img src={Libros.src} alt="Libros" class="absolute size-10 w-12 -mt-[-0.5px] ml-178" />
+			<a href="/login" class="absolute text-[16px] ml-230 mt-2.5">Login</a>
+			<a href="./" class="absolute text-[16px] ml-6 mt-2.5">Inicio</a>
+		</header>
+	</div>
+
+    <article class="bg-[#F5F3EB] rounded-xl mt-4 max-w-5xl mx-auto p-6 shadow-lg">
+        <h1 class="font-bold text-xl mb-4 text-center text-gray-900">Participating Comics</h1>
+        <p class="relative font-regular ml-1.5 text-[14px] leading-relaxed text-center">Here you can find the comics created by the students of the Simón Bolívar Institution.</p>
+        
+        <picture class="flex flex-row">
+            <img src={Comic1.src} alt="Comic 1" class="size-40 mt-4" />
+            <img src={Comic1.src} alt="Comic 1" class="size-40 mt-4 ml-6" />
+        </picture>
+        <a href="/public/comics_pdf/Mapa Mental sobre IDR - Juan Sebastian Delgado Parra.pdf" download="Mapa Mental sobre IDR - Juan Sebastian Delgado Parra" class="ml-13 mt-2">Comic 1</a>
+        <a href="/public/comics_pdf/Mapa Mental sobre IDR - Juan Sebastian Delgado Parra.pdf" download="Mapa Mental sobre IDR - Juan Sebastian Delgado Parra" class="ml-32 mt-2">Comic 1</a>
+        
+        
+    </article>
+</Layout>
