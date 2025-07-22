@@ -466,14 +466,14 @@ function toggleMenu() {
 document.addEventListener('click', function(event) {
     const menu = document.querySelector('.navigation-menu');
     const hamburger = document.querySelector('.hamburger-menu');
-    
+    const target = event.target as Node;
+
     if (menu && hamburger) {
-        if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
+        if (!menu.contains(target) && !hamburger.contains(target)) {
             menu.classList.add('hidden');
         }
     }
 });
-
 // Ensure script runs after DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     const hamburgerButton = document.querySelector('.hamburger-menu');
