@@ -5,32 +5,47 @@ import Libros from '../assets/Libros.webp';
 
 <Layout>
 	<div class="pt-2.5">
-		<header class="font-bold pt-1.5 bg-[#F5F3EB] rounded-full h-14 ml-31 max-w-5xl mx-auto">
-			<h1 class="absolute text-[22px] ml-82 mt-[4.45px]">Reading is my superpower</h1>
-			<img src={Libros.src} alt="Libros" class="absolute size-10 w-12 -mt-[-0.5px] ml-69" />
-			<img src={Libros.src} alt="Libros" class="absolute size-10 w-12 -mt-[-0.5px] ml-178" />
-			<a href="/login" class="absolute text-[16px] ml-230 mt-2.5">Login</a>
-			<a href="/comic" class="absolute text-[16px] ml-6 mt-2.5">Comics</a>
+		<header class="font-bold bg-[#F5F3EB] rounded-full max-w-5xl mx-auto header-responsive relative">
+			<!-- Hamburger Menu Button -->
+			<button class="hamburger-menu absolute z-10" onclick="toggleMenu()">
+				<div class="hamburger-line"></div>
+				<div class="hamburger-line"></div>
+				<div class="hamburger-line"></div>
+			</button>
+			
+			<!-- Navigation Menu -->
+			<nav class="navigation-menu absolute bg-[#F5F3EB] rounded-lg shadow-lg z-20 hidden">
+				<a href="/comic" class="nav-link block px-4 py-2 text-[14px] hover:bg-[#E5E1D6] rounded-t-lg transition-colors duration-200">Comics</a>
+				<a href="/login" class="nav-link block px-4 py-2 text-[14px] hover:bg-[#E5E1D6] rounded-b-lg transition-colors duration-200">Login</a>
+			</nav>
+			
+			<div class="header-content">
+				<h1 class="header-title">Reading is my superpower</h1>
+				<img src={Libros.src} alt="Libros" class="header-book-left" />
+				<img src={Libros.src} alt="Libros" class="header-book-right" />
+			</div>
 		</header>
 	</div>
 
-	<article class="bg-[#F5F3EB] rounded-xl mt-4 max-w-5xl mx-auto p-6 shadow-lg">
-		<h1 class="font-bold text-2xl mb-4 text-center text-gray-900">Welcome to event of Reading in Simon Bolivar High School!</h1>
-		<p class="relative font-regular ml-1.5 text-[14px] leading-relaxed"> <br> ¡Hello dear students of the educational community of the Simón Bolívar Institution! <br><br> Today we present a very special event that celebrates creativity, imagination, and the love of reading. Students from 6th to 11th grade have participated in an inspiring project where they created their own original comics for an event titled "Reading is my superpower." Through this initiative, these young artists and storytellers were invited to express how reading empowers them, fuels their imagination, and transforms them into heroes of their own stories. <br><br> Each comic is a unique reflection of their perspective, combining colorful illustrations with powerful narratives that showcase the importance of reading in their lives. This project not only promotes literacy but also allows students to develop artistic skills, critical thinking, and a deeper connection to the stories they read and create.<br><br> Now, it's your turn to be part of this celebration. We invite you to explore the incredible comics these students have crafted and cast your vote for the one that resonates with you the most. Your participation helps encourage and recognize the talent and hard work of these young creators. Don't miss this chance to support their voices and celebrate the superpower of reading!</p>
+	<article class="bg-[#F5F3EB] rounded-xl mt-4 max-w-5xl mx-auto p-6 shadow-lg article-responsive">
+		<h1 class="font-bold text-2xl mb-4 text-center text-gray-900 title-responsive">Welcome to event of Reading in Simon Bolivar High School!</h1>
+		<p class="relative font-regular ml-1.5 text-[14px] leading-relaxed paragraph-responsive"> <br> ¡Hello dear students of the educational community of the Simón Bolívar Institution! <br><br> Today we present a very special event that celebrates creativity, imagination, and the love of reading. Students from 6th to 11th grade have participated in an inspiring project where they created their own original comics for an event titled "Reading is my superpower." Through this initiative, these young artists and storytellers were invited to express how reading empowers them, fuels their imagination, and transforms them into heroes of their own stories. <br><br> Each comic is a unique reflection of their perspective, combining colorful illustrations with powerful narratives that showcase the importance of reading in their lives. This project not only promotes literacy but also allows students to develop artistic skills, critical thinking, and a deeper connection to the stories they read and create.<br><br> Now, it's your turn to be part of this celebration. We invite you to explore the incredible comics these students have crafted and cast your vote for the one that resonates with you the most. Your participation helps encourage and recognize the talent and hard work of these young creators. Don't miss this chance to support their voices and celebrate the superpower of reading!</p>
 
-		<button 
-			onclick="document.getElementById('dialog').showModal()"
-			class="mx-auto block mt-6 ml-70 bg-[#3A5A6B] text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors"
-		>
-			Show Voting Instructions
-		</button>
+		<div class="buttons-container">
+			<button 
+				onclick="document.getElementById('dialog').showModal()"
+				class="vote-button bg-[#3A5A6B] text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors"
+			>
+				Show Voting Instructions
+			</button>
 
-		<button 
-			onclick="document.getElementById('dialog2').showModal()"
-			class="mx-auto block -mt-10 mr-80 bg-[#3A5A6B] text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors"
-		>
-			Vote now!
-		</button>
+			<button 
+				onclick="document.getElementById('dialog2').showModal()"
+				class="vote-button bg-[#3A5A6B] text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors"
+			>
+				Vote now!
+			</button>
+		</div>
 
 		<dialog id="dialog" class="absolute rounded-xl max-w-5xl mx-auto p-6 backdrop:bg-black/40">
 			<div class="bg-[#F5F3EB] p-6 rounded-xl">
@@ -49,101 +64,493 @@ import Libros from '../assets/Libros.webp';
 		</dialog>
 
 		<dialog id="dialog2" class="absolute rounded-xl max-w-5xl mx-auto p-6 backdrop:bg-black/40">
-	<div class="bg-[#F5F3EB] p-6 rounded-xl">
-		<form method="dialog" class="flex justify-end">
-			<button class="text-gray-600 hover:text-gray-800 mb-2">✕</button>
-		</form>
-		<h2 class="font-bold text-xl mb-4 text-center">Vote for the best comic now!</h2>
-		<form method="post" action="/api/vote" id="voteForm">
-			<div class="space-y-4">
-				<div class="flex flex-col">
-					<label for="Name" class="text-gray-700 font-medium mb-1">Name:</label>
-					<input 
-						type="text" 
-						id="Name" 
-						name="Name" 
-						required 
-						placeholder="Enter your name"
-						class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
-					>
-				</div>
-				<div class="flex flex-col">
-					<label for="Code" class="text-gray-700 font-medium mb-1">Instituional Code:</label>
-					<input 
-						type="text" 
-						id="Code" 
-						name="Code" 
-						required 
-						placeholder="Enter your Instituional Code"
-						class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
-					>
-				</div>
-				<div class="flex flex-col">
-					<label for="Grade" class="text-gray-700 font-medium mb-1">Grade:</label>
-					<input 
-						type="text" 
-						id="Grade" 
-						name="Grade" 
-						required 
-						placeholder="Enter your grade"
-						class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
-					>
-				</div>
-				<div class="flex flex-col">
-					<label for="Comic" class="text-gray-700 font-medium mb-1">Comic:</label>
-					<select 
-						id="Comic" 
-						name="Comic" 
-						required 
-						class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
-					>
-						<option value="" disabled selected>Select your favorite comic</option>
-						<option value="comic1">The Reading Hero</option>
-						<option value="comic2">Adventures in Bookland</option>
-						<option value="comic3">Super Reader</option>
-						<option value="comic4">The Power of Words</option>
-						<option value="comic5">Library Warriors</option>
-					</select>
-				</div>
-				<button type="submit" class="w-full bg-[#3A5A6B] text-white py-2 px-4 rounded-lg hover:bg-blue-800 transition-colors">
-					Submit Vote
-				</button>
-				<p id="message" class="text-sm text-center mt-2"></p>
+			<div class="bg-[#F5F3EB] p-6 rounded-xl">
+				<form method="dialog" class="flex justify-end">
+					<button class="text-gray-600 hover:text-gray-800 mb-2">✕</button>
+				</form>
+				<h2 class="font-bold text-xl mb-4 text-center">Vote for the best comic now!</h2>
+				<form method="post" action="/api/vote" id="voteForm">
+					<div class="space-y-4">
+						<div class="flex flex-col">
+							<label for="Name" class="text-gray-700 font-medium mb-1">Name:</label>
+							<input 
+								type="text" 
+								id="Name" 
+								name="Name" 
+								required 
+								placeholder="Enter your name"
+								class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
+							>
+						</div>
+						<div class="flex flex-col">
+							<label for="Code" class="text-gray-700 font-medium mb-1">Instituional Code:</label>
+							<input 
+								type="text" 
+								id="Code" 
+								name="Code" 
+								required 
+								placeholder="Enter your Instituional Code"
+								class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
+							>
+						</div>
+						<div class="flex flex-col">
+							<label for="Grade" class="text-gray-700 font-medium mb-1">Grade:</label>
+							<input 
+								type="text" 
+								id="Grade" 
+								name="Grade" 
+								required 
+								placeholder="Enter your grade"
+								class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
+							>
+						</div>
+						<div class="flex flex-col">
+							<label for="Comic" class="text-gray-700 font-medium mb-1">Comic:</label>
+							<select 
+								id="Comic" 
+								name="Comic" 
+								required 
+								class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5A6B]"
+							>
+								<option value="" disabled selected>Select your favorite comic</option>
+								<option value="comic1">The Reading Hero</option>
+								<option value="comic2">Adventures in Bookland</option>
+								<option value="comic3">Super Reader</option>
+								<option value="comic4">The Power of Words</option>
+								<option value="comic5">Library Warriors</option>
+							</select>
+						</div>
+						<button type="submit" class="w-full bg-[#3A5A6B] text-white py-2 px-4 rounded-lg hover:bg-blue-800 transition-colors">
+							Submit Vote
+						</button>
+						<p id="message" class="text-sm text-center mt-2"></p>
+					</div>
+				</form>
+
+				<script>
+					const form = document.getElementById('voteForm') as HTMLFormElement;
+					const message = document.getElementById('message');
+
+					if (!message) throw new Error('Message element not found');
+					if (!form) throw new Error('Form element not found');
+
+					form.addEventListener('submit', async (e) => {
+						e.preventDefault();
+						const data = Object.fromEntries(new FormData(form));
+						console.log(data);
+
+						try {
+							const res = await fetch('/api/vote', {
+								method: 'POST',
+								headers: { 'Content-Type': 'application/json' },
+								body: JSON.stringify(data)
+							});
+
+							const result = await res.json();
+							message.textContent = result.message;
+							message.className = 'text-green-600';
+						} catch (err) {
+							message.textContent = 'Error sending your vote.';
+							message.className = 'text-red-600';
+						}
+					});
+				</script>
 			</div>
-		</form>
-
-		<script>
-	const form = document.getElementById('voteForm') as HTMLFormElement;
-	const message = document.getElementById('message');
-
-	if (!message) throw new Error('Message element not found');
-	if (!form) throw new Error('Form element not found');
-
-	form.addEventListener('submit', async (e) => {
-		e.preventDefault();
-		const data = Object.fromEntries(new FormData(form));
-		console.log(data);
-
-		try {
-			const res = await fetch('/api/vote', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(data)
-			});
-
-			const result = await res.json();
-			message.textContent = result.message;
-			message.className = 'text-green-600';
-		} catch (err) {
-			message.textContent = 'Error sending your vote.';
-			message.className = 'text-red-600';
-		}
-	});
-</script>
-
-	</div>
-</dialog>
-</article>
-
-	
+		</dialog>
+	</article>
 </Layout>
+
+<style>
+/* Base Header Styles */
+.header-responsive {
+    padding: 0.5rem 1rem;
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+}
+
+.header-title {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+    text-align: center;
+}
+
+.header-book-left,
+.header-book-right {
+    width: 2.5rem;
+    height: 2rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+    /* Hide by default - will only show on desktop */
+    display: none;
+}
+
+/* Hamburger Menu Styles */
+.hamburger-menu {
+    cursor: pointer;
+    padding: 8px;
+    border: none;
+    background: none;
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    z-index: 30;
+}
+
+.hamburger-menu:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.hamburger-line {
+    width: 20px;
+    height: 2px;
+    background-color: #333;
+    margin: 3px 0;
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+.hamburger-menu:hover .hamburger-line {
+    background-color: #000;
+}
+
+.navigation-menu {
+    min-width: 120px;
+    border: 1px solid #E5E1D6;
+    left: 1rem;
+    top: calc(100% + 0.5rem);
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #000;
+}
+
+/* Buttons Container */
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.vote-button {
+    min-width: 200px;
+}
+
+/* Desktop Styles - ONLY HERE SHOW THE BOOKS */
+@media (min-width: 1024px) {
+    .header-responsive {
+        padding: 0.5rem 2rem;
+        min-height: 3rem;
+    }
+    
+    .header-title {
+        font-size: 22px;
+    }
+    
+    /* Show book images ONLY on desktop */
+    .header-book-left,
+    .header-book-right {
+        display: block;
+    }
+    
+    .header-book-left {
+        left: calc(50% - 200px);
+    }
+    
+    .header-book-right {
+        right: calc(50% - 200px);
+    }
+    
+    .title-responsive {
+        font-size: 2rem;
+    }
+    
+    .paragraph-responsive {
+        font-size: 14px;
+        margin-left: 0.375rem;
+    }
+    
+    .buttons-container {
+        justify-content: center;
+        gap: 3rem;
+    }
+}
+
+/* Large Desktop */
+@media (min-width: 1440px) {
+    .header-book-left {
+        left: calc(50% - 240px);
+    }
+    
+    .header-book-right {
+        right: calc(50% - 240px);
+    }
+}
+
+/* Extra Large Desktop */
+@media (min-width: 1920px) {
+    .header-book-left {
+        left: calc(50% - 300px);
+    }
+    
+    .header-book-right {
+        right: calc(50% - 300px);
+    }
+}
+
+/* Tablet Styles - NO BOOKS */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .header-responsive {
+        margin: 0 1.5rem;
+        padding: 0.75rem 1rem;
+        min-height: 3.5rem;
+    }
+    
+    .header-content {
+        gap: 1.5rem;
+    }
+    
+    .header-title {
+        font-size: 18px;
+    }
+    
+    /* Books remain hidden on tablet */
+    .header-book-left, 
+    .header-book-right {
+        display: none;
+    }
+    
+    .hamburger-menu {
+        padding: 6px;
+    }
+    
+    .hamburger-line {
+        width: 18px;
+    }
+    
+    .navigation-menu {
+        top: calc(100% + 0.25rem);
+    }
+    
+    .article-responsive {
+        margin: 1rem 1.5rem;
+        padding: 1.25rem;
+    }
+    
+    .title-responsive {
+        font-size: 1.75rem;
+    }
+    
+    .paragraph-responsive {
+        margin-left: 0;
+        font-size: 13px;
+        padding: 0 1rem;
+    }
+    
+    .buttons-container {
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    
+    .vote-button {
+        min-width: 180px;
+        font-size: 14px;
+    }
+}
+
+/* Mobile Styles - NO BOOKS */
+@media (max-width: 767px) {
+    .pt-2.5 {
+        padding-top: 0.75rem;
+    }
+    
+    .header-responsive {
+        margin: 0 1rem;
+        padding: 0.5rem;
+        min-height: 3rem;
+    }
+    
+    .header-content {
+        gap: 0.75rem;
+    }
+    
+    .header-title {
+        font-size: 15px;
+        margin: 0;
+        text-align: center;
+        line-height: 1.3;
+    }
+    
+    /* Books remain hidden on mobile */
+    .header-book-left, 
+    .header-book-right {
+        display: none;
+    }
+    
+    .hamburger-menu {
+        padding: 4px;
+        left: 0.5rem;
+    }
+    
+    .hamburger-line {
+        width: 16px;
+        height: 1.5px;
+        margin: 2.5px 0;
+    }
+    
+    .navigation-menu {
+        top: calc(100% + 0.25rem);
+        left: 0.5rem;
+    }
+    
+    .article-responsive {
+        margin: 0.75rem;
+        padding: 1rem;
+    }
+    
+    .title-responsive {
+        font-size: 1.25rem;
+        line-height: 1.4;
+    }
+    
+    .paragraph-responsive {
+        margin-left: 0;
+        font-size: 12px;
+        text-align: left;
+        line-height: 1.5;
+    }
+    
+    .buttons-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+    
+    .vote-button {
+        width: 100%;
+        max-width: 280px;
+        min-width: auto;
+        font-size: 14px;
+        padding: 0.75rem 1.5rem;
+    }
+}
+
+/* Extra Small Mobile - NO BOOKS */
+@media (max-width: 480px) {
+    .header-content {
+        gap: 0.5rem;
+    }
+    
+    .header-title {
+        font-size: 13px;
+        line-height: 1.2;
+    }
+    
+    /* Books remain hidden on extra small mobile */
+    .header-book-left, 
+    .header-book-right {
+        display: none;
+    }
+    
+    .hamburger-menu {
+        padding: 3px;
+        left: 0.25rem;
+    }
+    
+    .hamburger-line {
+        width: 14px;
+        height: 1.5px;
+    }
+    
+    .navigation-menu {
+        left: 0.25rem;
+    }
+    
+    .article-responsive {
+        margin: 0.5rem;
+        padding: 0.75rem;
+    }
+    
+    .title-responsive {
+        font-size: 1.125rem;
+    }
+    
+    .paragraph-responsive {
+        font-size: 11px;
+    }
+    
+    .vote-button {
+        font-size: 13px;
+        padding: 0.625rem 1.25rem;
+    }
+}
+
+/* Animation for menu toggle */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.navigation-menu:not(.hidden) {
+    animation: slideDown 0.3s ease-out;
+}
+</style>
+
+<script>
+function toggleMenu() {
+    const menu = document.querySelector('.navigation-menu');
+    if (menu) {
+        menu.classList.toggle('hidden');
+    }
+}
+
+// Close menu when clicking outside
+document.addEventListener('click', function(event) {
+    const menu = document.querySelector('.navigation-menu');
+    const hamburger = document.querySelector('.hamburger-menu');
+    
+    if (menu && hamburger) {
+        if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
+            menu.classList.add('hidden');
+        }
+    }
+});
+
+// Ensure script runs after DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburgerButton = document.querySelector('.hamburger-menu');
+    if (hamburgerButton) {
+        hamburgerButton.addEventListener('click', toggleMenu);
+    }
+});
+</script>

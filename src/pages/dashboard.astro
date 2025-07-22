@@ -5,7 +5,7 @@ import { connectDB } from '../lib/db.js';
 
 interface Voto {
 	name: string;
-	email: string;
+	code: number;
 	grade: number;
 	comic: string | Date;
 }
@@ -20,40 +20,43 @@ for (const voto of votos) {
 	votosPorComic[comic] = (votosPorComic[comic] || 0) + 1;
 }
 ---
+
 <Layout>
 	<div class="pt-2.5">
-		<header class="font-bold pt-1.5 bg-[#F5F3EB] rounded-full h-14 ml-31 max-w-5xl mx-auto relative">
-			<h1 class="absolute text-[22px] ml-82 mt-[4.45px]">Reading is my superpower</h1>
-			<img src={Libros.src} alt="Libros" class="absolute w-12 h-12 top-[1px] left-[275px]" />
-			<img src={Libros.src} alt="Libros" class="absolute w-12 h-12 top-[1px] left-[710px]" />
-			<a href=".." class="absolute text-[16px] right-8 top-3">Salir</a>
+		<header class="font-bold bg-[#F5F3EB] rounded-full max-w-5xl mx-auto header-responsive relative">
+			<div class="header-content">
+				<h1 class="header-title">Reading is my superpower</h1>
+				<img src={Libros.src} alt="Libros" class="header-book-left" />
+				<img src={Libros.src} alt="Libros" class="header-book-right" />
+				<a class="logout-button" href="./">Salir</a>
+			</div>
 		</header>
 
-		<article class="bg-[#F5F3EB] rounded-xl mt-6 max-w-5xl mx-auto p-6 shadow-lg">
-			<h1 class="font-bold text-2xl mb-4 text-center text-gray-900">Contador de Votos</h1>
+		<article class="bg-[#F5F3EB] rounded-xl mt-6 max-w-5xl mx-auto p-6 shadow-lg dashboard-article-responsive">
+			<h1 class="font-bold text-2xl mb-4 text-center text-gray-900 dashboard-title-responsive">CONTADOR DE VOTOS</h1>
 
-			<section class="overflow-x-auto">
-				<table class="min-w-full bg-white border border-gray-200 rounded-lg">
+			<section class="overflow-x-auto table-section-responsive">
+				<table class="min-w-full bg-white border border-gray-200 rounded-lg table-responsive">
 					<thead>
 						<tr class="bg-gray-100 text-gray-700">
-							<th class="py-2 px-4 border-b text-left">Name</th>
-							<th class="py-2 px-4 border-b text-left">Email</th>
-							<th class="py-2 px-4 border-b text-left">Grade</th>
-							<th class="py-2 px-4 border-b text-left">Comic</th>
+							<th class="py-2 px-4 border-b text-left table-header-responsive">Name</th>
+							<th class="py-2 px-4 border-b text-left table-header-responsive">Code</th>
+							<th class="py-2 px-4 border-b text-left table-header-responsive">Grade</th>
+							<th class="py-2 px-4 border-b text-left table-header-responsive">Comic</th>
 						</tr>
 					</thead>
 					<tbody>
 						{votos.length === 0 ? (
 							<tr>
-								<td colspan="4" class="text-center py-4 text-gray-500">No hay votos registrados.</td>
+								<td colspan="4" class="text-center py-4 text-gray-500 table-cell-responsive">No hay votos registrados.</td>
 							</tr>
 						) : (
 							votos.map((voto) => (
 								<tr class="hover:bg-gray-50 transition-colors">
-									<td class="py-2 px-4 border-b">{voto.name}</td>
-									<td class="py-2 px-4 border-b">{voto.email}</td>
-									<td class="py-2 px-4 border-b">{voto.grade}</td>
-									<td class="py-2 px-4 border-b">{voto.comic}</td>
+									<td class="py-2 px-4 border-b table-cell-responsive">{voto.name}</td>
+									<td class="py-2 px-4 border-b table-cell-responsive">{voto.code}</td>
+									<td class="py-2 px-4 border-b table-cell-responsive">{voto.grade}</td>
+									<td class="py-2 px-4 border-b table-cell-responsive">{voto.comic}</td>
 								</tr>
 							))
 						)}
@@ -62,10 +65,10 @@ for (const voto of votos) {
 			</section>
 
 			<!-- Botón para abrir el dialog -->
-			<div class="flex justify-center mt-6">
+			<div class="flex justify-center mt-6 button-container-responsive">
 				<button
 					type="button"
-					class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+					class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition votes-button-responsive"
 					onclick="document.getElementById('votos-dialog')?.showModal()"
 				>
 					Ver votos por comic
@@ -73,26 +76,463 @@ for (const voto of votos) {
 			</div>
 
 			<!-- Dialog con el conteo de votos -->
-			<dialog id="votos-dialog" class="rounded-lg p-6 mt-22 bg-white shadow-lg max-w-md mx-auto">
-				<h2 class="text-lg font-bold mb-4">Votos por comic</h2>
-				<ul class="mb-4">
-					{Object.entries(votosPorComic).map(([comic, cantidad]) => (
-						<li class="mb-1">{comic} = {cantidad}</li>
-					))}
-				</ul>
-				<div class="flex justify-end">
-					<button
-						type="button"
-						class="bg-gray-400 text-white px-3 py-1 rounded hover:bg-gray-500"
-						onclick="document.getElementById('votos-dialog')?.close()"
-					>
-						Cerrar
-					</button>
+			<dialog id="votos-dialog" class="rounded-lg p-6 bg-white shadow-lg max-w-md mx-auto dialog-responsive backdrop:bg-black/40">
+				<div class="dialog-content-responsive">
+					<h2 class="text-lg font-bold mb-4 dialog-title-responsive">Votos por comic</h2>
+					<ul class="mb-4 votes-list-responsive">
+						{Object.entries(votosPorComic).map(([comic, cantidad]) => (
+							<li class="mb-2 vote-item-responsive">{comic} = {cantidad}</li>
+						))}
+					</ul>
+					<div class="flex justify-end">
+						<button
+							type="button"
+							class="bg-gray-400 text-white px-3 py-1 rounded hover:bg-gray-500 close-button-responsive"
+							onclick="document.getElementById('votos-dialog')?.close()"
+						>
+							Cerrar
+						</button>
+					</div>
 				</div>
 			</dialog>
 		</article>
 	</div>
-	<script>
-		// Para soportar Astro Islands, si usas SSR, puedes mover esto a un componente React/Svelte/Vue
-	</script>
 </Layout>
+
+<style>
+/* Base Header Styles */
+.header-responsive {
+    padding: 0.5rem 1rem;
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+}
+
+.header-title {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+    text-align: center;
+}
+
+.header-book-left,
+.header-book-right {
+    width: 2.5rem;
+    height: 2rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+    /* Hide by default - will only show on desktop */
+    display: none;
+}
+
+.logout-button {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #333;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    /* Show on all devices */
+    display: block;
+}
+
+.logout-button:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #000;
+}
+
+/* Dashboard Base Styles */
+.dashboard-article-responsive {
+    margin: 1rem;
+}
+
+.dashboard-title-responsive {
+    font-size: 1.5rem;
+}
+
+.table-section-responsive {
+    margin-bottom: 1rem;
+}
+
+.table-responsive {
+    font-size: 14px;
+}
+
+.table-header-responsive {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.table-cell-responsive {
+    font-size: 13px;
+}
+
+.button-container-responsive {
+    margin-top: 1.5rem;
+}
+
+.votes-button-responsive {
+    font-size: 14px;
+    padding: 0.75rem 1.5rem;
+}
+
+.dialog-responsive {
+    width: 90%;
+    max-width: 400px;
+}
+
+.dialog-content-responsive {
+    width: 100%;
+}
+
+.dialog-title-responsive {
+    font-size: 1.25rem;
+}
+
+.votes-list-responsive {
+    font-size: 14px;
+}
+
+.vote-item-responsive {
+    padding: 0.25rem 0;
+}
+
+.close-button-responsive {
+    font-size: 14px;
+    padding: 0.5rem 1rem;
+}
+
+/* Desktop Styles - Show books and larger logout button */
+@media (min-width: 1024px) {
+    .header-responsive {
+        padding: 0.5rem 2rem;
+        min-height: 3rem;
+    }
+    
+    .header-title {
+        font-size: 22px;
+    }
+    
+    .header-book-left,
+    .header-book-right {
+        display: block;
+    }
+    
+    .logout-button {
+        font-size: 16px;
+    }
+    
+    .header-book-left {
+        left: calc(50% - 200px);
+    }
+    
+    .header-book-right {
+        right: calc(50% - 200px);
+    }
+    
+    .dashboard-article-responsive {
+        margin: 1.5rem auto;
+    }
+    
+    .dashboard-title-responsive {
+        font-size: 2rem;
+    }
+    
+    .table-responsive {
+        font-size: 16px;
+    }
+    
+    .table-header-responsive {
+        font-size: 16px;
+    }
+    
+    .table-cell-responsive {
+        font-size: 15px;
+    }
+    
+    .votes-button-responsive {
+        font-size: 16px;
+        padding: 0.875rem 2rem;
+    }
+    
+    .dialog-responsive {
+        max-width: 500px;
+    }
+    
+    .dialog-title-responsive {
+        font-size: 1.5rem;
+    }
+    
+    .votes-list-responsive {
+        font-size: 16px;
+    }
+    
+    .close-button-responsive {
+        font-size: 16px;
+        padding: 0.75rem 1.5rem;
+    }
+}
+
+/* Large Desktop */
+@media (min-width: 1440px) {
+    .header-book-left {
+        left: calc(50% - 240px);
+    }
+    
+    .header-book-right {
+        right: calc(50% - 240px);
+    }
+}
+
+/* Extra Large Desktop */
+@media (min-width: 1920px) {
+    .header-book-left {
+        left: calc(50% - 300px);
+    }
+    
+    .header-book-right {
+        right: calc(50% - 300px);
+    }
+}
+
+/* Tablet Styles - NO BOOKS */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .header-responsive {
+        margin: 0 1.5rem;
+        padding: 0.75rem 1rem;
+        min-height: 3.5rem;
+    }
+    
+    .header-content {
+        gap: 1.5rem;
+    }
+    
+    .header-title {
+        font-size: 18px;
+    }
+    
+    .header-book-left, 
+    .header-book-right {
+        display: none;
+    }
+    
+    .logout-button {
+        font-size: 15px;
+    }
+    
+    .dashboard-article-responsive {
+        margin: 1rem 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .dashboard-title-responsive {
+        font-size: 1.75rem;
+    }
+    
+    .table-responsive {
+        font-size: 15px;
+    }
+    
+    .table-header-responsive {
+        font-size: 15px;
+    }
+    
+    .table-cell-responsive {
+        font-size: 14px;
+    }
+    
+    .votes-button-responsive {
+        font-size: 15px;
+        padding: 0.75rem 1.75rem;
+    }
+    
+    .dialog-title-responsive {
+        font-size: 1.375rem;
+    }
+    
+    .votes-list-responsive {
+        font-size: 15px;
+    }
+}
+
+/* Mobile Styles - NO BOOKS */
+@media (max-width: 767px) {
+    .pt-2.5 {
+        padding-top: 0.75rem;
+    }
+    
+    .header-responsive {
+        margin: 0 1rem;
+        padding: 0.5rem;
+        min-height: 3rem;
+    }
+    
+    .header-content {
+        gap: 0.75rem;
+    }
+    
+    .header-title {
+        font-size: 15px;
+        margin: 0;
+        text-align: center;
+        line-height: 1.3;
+    }
+    
+    .header-book-left, 
+    .header-book-right {
+        display: none;
+    }
+    
+    .logout-button {
+        font-size: 13px;
+        padding: 0.375rem;
+    }
+    
+    .dashboard-article-responsive {
+        margin: 0.75rem;
+        padding: 1rem;
+    }
+    
+    .dashboard-title-responsive {
+        font-size: 1.25rem;
+        line-height: 1.4;
+    }
+    
+    .table-section-responsive {
+        margin-bottom: 1.5rem;
+    }
+    
+    .table-responsive {
+        font-size: 12px;
+    }
+    
+    .table-header-responsive {
+        font-size: 12px;
+        padding: 0.5rem 0.25rem;
+    }
+    
+    .table-cell-responsive {
+        font-size: 11px;
+        padding: 0.5rem 0.25rem;
+    }
+    
+    .button-container-responsive {
+        margin-top: 1rem;
+    }
+    
+    .votes-button-responsive {
+        font-size: 13px;
+        padding: 0.625rem 1.25rem;
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .dialog-responsive {
+        width: 95%;
+        max-width: 350px;
+        margin: 1rem;
+    }
+    
+    .dialog-title-responsive {
+        font-size: 1.125rem;
+    }
+    
+    .votes-list-responsive {
+        font-size: 13px;
+    }
+    
+    .close-button-responsive {
+        font-size: 13px;
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* Extra Small Mobile - NO BOOKS */
+@media (max-width: 480px) {
+    .header-content {
+        gap: 0.5rem;
+    }
+    
+    .header-title {
+        font-size: 13px;
+        line-height: 1.2;
+    }
+    
+    .header-book-left, 
+    .header-book-right {
+        display: none;
+    }
+    
+    .logout-button {
+        font-size: 12px;
+        padding: 0.25rem;
+    }
+    
+    .dashboard-article-responsive {
+        margin: 0.5rem;
+        padding: 0.75rem;
+    }
+    
+    .dashboard-title-responsive {
+        font-size: 1.125rem;
+    }
+    
+    .table-responsive {
+        font-size: 11px;
+    }
+    
+    .table-header-responsive {
+        font-size: 11px;
+        padding: 0.375rem 0.25rem;
+    }
+    
+    .table-cell-responsive {
+        font-size: 10px;
+        padding: 0.375rem 0.25rem;
+    }
+    
+    .votes-button-responsive {
+        font-size: 12px;
+        padding: 0.5rem 1rem;
+    }
+    
+    .dialog-responsive {
+        width: 98%;
+        max-width: 300px;
+    }
+    
+    .dialog-title-responsive {
+        font-size: 1rem;
+    }
+    
+    .votes-list-responsive {
+        font-size: 12px;
+    }
+    
+    .vote-item-responsive {
+        padding: 0.125rem 0;
+    }
+    
+    .close-button-responsive {
+        font-size: 12px;
+        padding: 0.375rem 0.75rem;
+    }
+}
+</style>

@@ -6,26 +6,469 @@ import Comic1 from "/public/comic/comic_1_image.webp"
 
 <Layout>
     <div class="pt-2.5">
-		<header class="font-bold pt-1.5 bg-[#F5F3EB] rounded-full h-14 ml-31 max-w-5xl mx-auto">
-			<h1 class="absolute text-[22px] ml-82 mt-[4.45px]">Reading is my superpower</h1>
-			<img src={Libros.src} alt="Libros" class="absolute size-10 w-12 -mt-[-0.5px] ml-69" />
-			<img src={Libros.src} alt="Libros" class="absolute size-10 w-12 -mt-[-0.5px] ml-178" />
-			<a href="/login" class="absolute text-[16px] ml-230 mt-2.5">Login</a>
-			<a href="./" class="absolute text-[16px] ml-6 mt-2.5">Inicio</a>
+		<header class="font-bold bg-[#F5F3EB] rounded-full max-w-5xl mx-auto header-responsive relative">
+			<!-- Hamburger Menu Button -->
+			<button class="hamburger-menu absolute z-10" onclick="toggleMenu()">
+				<div class="hamburger-line"></div>
+				<div class="hamburger-line"></div>
+				<div class="hamburger-line"></div>
+			</button>
+			
+			<!-- Navigation Menu -->
+			<nav class="navigation-menu absolute bg-[#F5F3EB] rounded-lg shadow-lg z-20 hidden">
+				<a href="./" class="nav-link block px-4 py-2 text-[14px] hover:bg-[#E5E1D6] rounded-t-lg transition-colors duration-200">Inicio</a>
+				<a href="/login" class="nav-link block px-4 py-2 text-[14px] hover:bg-[#E5E1D6] rounded-b-lg transition-colors duration-200">Login</a>
+			</nav>
+			
+			<div class="header-content">
+				<h1 class="header-title">Reading is my superpower</h1>
+				<img src={Libros.src} alt="Libros" class="header-book-left" />
+				<img src={Libros.src} alt="Libros" class="header-book-right" />
+			</div>
 		</header>
 	</div>
 
-    <article class="bg-[#F5F3EB] rounded-xl mt-4 max-w-5xl mx-auto p-6 shadow-lg">
-        <h1 class="font-bold text-xl mb-4 text-center text-gray-900">Participating Comics</h1>
-        <p class="relative font-regular ml-1.5 text-[14px] leading-relaxed text-center">Here you can find the comics created by the students of the Simón Bolívar Institution.</p>
+    <article class="bg-[#F5F3EB] rounded-xl mt-4 max-w-5xl mx-auto p-6 shadow-lg article-responsive">
+        <h1 class="font-bold text-lg mb-4 text-center text-gray-900">Participating Comics</h1>
+        <p class="relative font-regular ml-1.5 text-[13px] leading-relaxed text-center paragraph-responsive">Here you can find the comics created by the students of the Simón Bolívar Institution.</p>
         
-        <picture class="flex flex-row">
-            <img src={Comic1.src} alt="Comic 1" class="size-40 mt-4" />
-            <img src={Comic1.src} alt="Comic 1" class="size-40 mt-4 ml-6" />
+        <picture class="comics-container">
+            <div class="comic-item">
+                <img src={Comic1.src} alt="Comic 1" class="comic-image" />
+                <a href="/comics_pdf/Mapa Mental sobre IDR - Juan Sebastian Delgado Parra.pdf" target="_blank" class="comic-link">Comic 1</a>
+            </div>
+            <div class="comic-item">
+                <img src={Comic1.src} alt="Comic 1" class="comic-image" />
+                <a href="/public/comics_pdf/Mapa Mental sobre IDR - Juan Sebastian Delgado Parra.pdf" target="_blank" class="comic-link">Comic 1</a>
+            </div>
         </picture>
-        <a href="/comics_pdf/Mapa Mental sobre IDR - Juan Sebastian Delgado Parra.pdf" download="Mapa Mental sobre IDR - Juan Sebastian Delgado Parra" class="ml-13 mt-2">Comic 1</a>
-        <a href="/public/comics_pdf/Mapa Mental sobre IDR - Juan Sebastian Delgado Parra.pdf" download="Mapa Mental sobre IDR - Juan Sebastian Delgado Parra" class="ml-32 mt-2">Comic 1</a>
-        
-        
     </article>
 </Layout>
+
+<style>
+/* Base Header Styles */
+.header-responsive {
+    padding: 0.5rem 1rem;
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+}
+
+.header-title {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+    text-align: center;
+}
+
+.header-book-left,
+.header-book-right {
+    width: 2.5rem;
+    height: 2rem;
+    position: absolute;
+}
+
+/* Hamburger Menu Styles */
+.hamburger-menu {
+    cursor: pointer;
+    padding: 6px;
+    border: none;
+    background: none;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.hamburger-menu:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.hamburger-line {
+    width: 18px;
+    height: 2px;
+    background-color: #333;
+    margin: 3px 0;
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+.hamburger-menu:hover .hamburger-line {
+    background-color: #000;
+}
+
+.navigation-menu {
+    min-width: 100px;
+    border: 1px solid #E5E1D6;
+    left: 1rem;
+    top: calc(100% + 0.5rem);
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #000;
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+    .header-responsive {
+        padding: 0.5rem 2rem;
+        min-height: 3rem;
+    }
+    
+    .header-title {
+        font-size: 18px;
+    }
+    
+    .header-book-left {
+        left: calc(50% - 180px);
+    }
+    
+    .header-book-right {
+        right: calc(50% - 180px);
+    }
+    
+    .comics-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+    
+    .comic-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Changed from flex-start to center */
+    }
+    
+    .comic-image {
+        width: 9rem;
+        height: 9rem;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Removed specific left margin rules for comic images and links */
+    .comic-link {
+        color: #333;
+        text-decoration: none;
+        font-weight: 500;
+        margin-top: 0.5rem;
+        font-size: 14px;
+        text-align: center; /* Ensure text is centered */
+    }
+    
+    .comic-link:hover {
+        color: #000;
+        text-decoration: underline;
+    }
+}
+
+/* Large Desktop */
+@media (min-width: 1440px) {
+    .header-book-left {
+        left: calc(50% - 220px);
+    }
+    
+    .header-book-right {
+        right: calc(50% - 220px);
+    }
+}
+
+/* Extra Large Desktop */
+@media (min-width: 1920px) {
+    .header-book-left {
+        left: calc(50% - 280px);
+    }
+    
+    .header-book-right {
+        right: calc(50% - 280px);
+    }
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .header-responsive {
+        margin: 0 1.5rem;
+        padding: 0.75rem;
+        min-height: auto;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .header-title {
+        font-size: 16px;
+        margin-bottom: 0.5rem;
+    }
+    
+    .header-book-left, 
+    .header-book-right {
+        display: none;
+    }
+    
+    .hamburger-menu {
+        top: 0.75rem;
+        transform: none;
+    }
+    
+    .navigation-menu {
+        top: 3rem;
+    }
+    
+    .article-responsive {
+        margin: 1rem 1.5rem;
+        padding: 1.25rem;
+    }
+    
+    .paragraph-responsive {
+        margin-left: 0;
+        font-size: 14px;
+        padding: 0 1rem;
+    }
+    
+    .comics-container {
+        flex-direction: row;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    
+    .comic-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 0 1 180px;
+    }
+    
+    .comic-image {
+        width: 7rem;
+        height: 7rem;
+        margin: 0;
+    }
+    
+    .comic-link {
+        margin: 0.5rem 0 0 0;
+        text-align: center;
+        color: #333;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 500;
+    }
+    
+    .comic-link:hover {
+        color: #000;
+        text-decoration: underline;
+    }
+}
+
+/* Mobile Styles */
+@media (max-width: 767px) {
+    .pt-2.5 {
+        padding-top: 0.75rem;
+    }
+    
+    .header-responsive {
+        margin: 0 1rem;
+        padding: 0.75rem;
+        min-height: auto;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .header-content {
+        flex-direction: row;
+        margin-top: 0;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .header-title {
+        font-size: 15px;
+        margin: 0;
+        text-align: center;
+        line-height: 1.3;
+    }
+    
+    .header-book-left, 
+    .header-book-right {
+        display: none;
+    }
+    
+    .hamburger-menu {
+        top: 50%;
+        transform: translateY(-50%);
+        align-self: flex-start;
+        padding: 4px;
+        left: 1rem;
+    }
+    
+    .hamburger-line {
+        width: 16px;
+        height: 1.5px;
+        margin: 2.5px 0;
+    }
+    
+    .navigation-menu {
+        top: calc(100% + 0.5rem);
+        left: 1rem;
+    }
+    
+    .article-responsive {
+        margin: 0.75rem;
+        padding: 1rem;
+    }
+    
+    .paragraph-responsive {
+        margin-left: 0;
+        font-size: 12px;
+        text-align: center;
+        line-height: 1.5;
+    }
+    
+    .comics-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .comic-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 220px;
+    }
+    
+    .comic-image {
+        width: 7.5rem;
+        height: 7.5rem;
+        margin: 0;
+        border-radius: 6px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .comic-link {
+        margin: 0.75rem 0 0 0;
+        text-align: center;
+        color: #333;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 0.4rem 0.8rem;
+        background-color: rgba(245, 243, 235, 0.8);
+        border-radius: 15px;
+        border: 1px solid #E5E1D6;
+        transition: all 0.3s ease;
+    }
+    
+    .comic-link:hover {
+        color: #000;
+        background-color: #E5E1D6;
+        transform: translateY(-1px);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 480px) {
+    .header-title {
+        font-size: 14px;
+        line-height: 1.3;
+    }
+    
+    .hamburger-menu {
+        padding: 3px;
+    }
+    
+    .hamburger-line {
+        width: 14px;
+        height: 1.5px;
+    }
+    
+    .article-responsive {
+        margin: 0.5rem;
+        padding: 0.75rem;
+    }
+    
+    .comic-image {
+        width: 6.5rem;
+        height: 6.5rem;
+    }
+    
+    .paragraph-responsive {
+        font-size: 11px;
+    }
+    
+    .comic-link {
+        font-size: 12px;
+        padding: 0.3rem 0.6rem;
+    }
+}
+
+/* Animation for menu toggle */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.navigation-menu:not(.hidden) {
+    animation: slideDown 0.3s ease-out;
+}
+</style>
+
+<script>
+function toggleMenu() {
+    const menu = document.querySelector('.navigation-menu');
+    if (menu) {
+        menu.classList.toggle('hidden');
+    }
+}
+
+// Close menu when clicking outside
+document.addEventListener('click', function(event) {
+    const menu = document.querySelector('.navigation-menu');
+    const hamburger = document.querySelector('.hamburger-menu');
+    
+    if (menu && hamburger) {
+        if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
+            menu.classList.add('hidden');
+        }
+    }
+});
+
+// Ensure script runs after DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburgerButton = document.querySelector('.hamburger-menu');
+    if (hamburgerButton) {
+        hamburgerButton.addEventListener('click', toggleMenu);
+    }
+});
+</script>
