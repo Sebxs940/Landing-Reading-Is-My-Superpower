@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Libros from '../assets/Libros.webp';
+import video from '../assets/video/WelcomeToEvent.mp4';
 ---
 
 <Layout>
@@ -27,7 +27,7 @@ import Libros from '../assets/Libros.webp';
 
 	<article class="bg-[#F5F3EB] rounded-xl mt-4 max-w-5xl mx-auto p-6 shadow-lg article-responsive">
 		<h1 class="font-bold text-2xl mb-4 text-center text-gray-900 title-responsive">Welcome to event of Reading in Simon Bolivar High School!</h1>
-		<p class="relative font-regular ml-1.5 text-[14px] leading-relaxed paragraph-responsive"> <br> ¡Hello dear students of the educational community of the Simón Bolívar Institution! <br><br> Today we present a very special event that celebrates creativity, imagination, and the love of reading. Students from 6th to 11th grade have participated in an inspiring project where they created their own original comics for an event titled "Reading is my superpower." Through this initiative, these young artists and storytellers were invited to express how reading empowers them, fuels their imagination, and transforms them into heroes of their own stories. <br><br> Each comic is a unique reflection of their perspective, combining colorful illustrations with powerful narratives that showcase the importance of reading in their lives. This project not only promotes literacy but also allows students to develop artistic skills, critical thinking, and a deeper connection to the stories they read and create.<br><br> Now, it's your turn to be part of this celebration. We invite you to explore the incredible comics these students have crafted and cast your vote for the one that resonates with you the most. Your participation helps encourage and recognize the talent and hard work of these young creators. Don't miss this chance to support their voices and celebrate the superpower of reading!</p>
+		<video src={video} controls></video>
 
 		<div class="buttons-container">
 			<button 
